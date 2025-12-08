@@ -1,0 +1,45 @@
+<mat-sidenav-container class="main-container">
+
+    <!-- Side Navigation Drawer -->
+    <mat-sidenav #sidenav mode="over" class="side-nav">
+        <mat-nav-list>
+            <a mat-list-item (click)="routeNav('dashboard'); sidenav.close()">Home</a>
+            <a mat-list-item (click)="routeNav('ddform'); sidenav.close()">Drag & Drop Form</a>
+            <a mat-list-item (click)="routeNav('dynamicform'); sidenav.close()">Dynamic Field Form</a>
+            <a mat-list-item (click)="routeNav('fcm-token'); sidenav.close()">FCM Token</a>
+            <a mat-list-item (click)="routeNav('user-dashboard'); sidenav.close()">Dashboard</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <!--Main Toolbar -->
+    <mat-toolbar class="main-toolbarheader blue-color">
+        <!-- Menu Icon (Visible on mobile) -->
+        @if(isMobile){
+        <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        }
+
+
+        <!-- App Title -->
+        <span class="app-title text-white">
+            <h5>Resume Builder</h5>
+        </span>
+
+        <!-- Desktop Navigation Buttons -->
+        <div class="nav-links ">
+            <!-- <button mat-button (click)="routeNav('dashboard')">Home</button>
+            <button mat-button (click)="routeNav('ddform')">Drag & Drop Form</button>
+            <button mat-button (click)="routeNav('dynamicform')">Dynamic Field Form</button>
+            <button mat-button (click)="routeNav('fcm-token')">FCM Token</button>-->
+            <button mat-button (click)="routeNav('resume-form')" class="text-white">Creat Resume</button>
+        </div>
+    </mat-toolbar>
+
+    <!-- Main Content -->
+    <div class="content">
+        <app-loader></app-loader>
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>

@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Other libraries */
+@import "./../node_modules/material-icons/iconfont/material-icons.css";
+@import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import "./../node_modules/ngx-toastr/toastr.css";
+// @import "../src/app/components/TempResume/template.scss";
+
+.flex_responsive {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mat-form-round {
+    width: 100% !important;
+}
+
+/* ❗ Remove custom height overrides to avoid breaking Material */
+.mat-mdc-form-field {
+    width: 100%;
+    min-width: 300px;
+}
+
+
+.blue-color {
+    background: #33567e !important;
+}
+
+
+.template-screen {
+    width: 210mm !important;
+    box-shadow: 0 0 5px #ccc;
+    padding: 20px;
+    min-height: 297mm;
+    background: #fff;
+    margin: 16px auto;
+}
+
+.word-wrap {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    white-space: normal;
+}

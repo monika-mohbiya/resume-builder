@@ -1,0 +1,122 @@
+<div class="template-screen">
+    <!-- Header -->
+    <div class="header">
+        @if(data.profilePicture){
+        <img class="profile-img" [src]="data.profilePicture" alt="Profile" />
+        }
+
+        <div class="info">
+            <h1>{{data.name}}</h1>
+            <h3>{{data.title}}</h3>
+
+            <span>{{data.address}}</span><br>
+            <span>Email: {{data.email}}</span><br>
+            <span>Phone: {{data.phone}}</span><br>
+
+            <div class="links">
+                @if(data.linkedin){
+                <a class="small word-wrap" [href]="data.linkedin">{{data.linkedin}}</a> |
+                }
+                @if(data.github){
+                <a class="small word-wrap" [href]="data.github">{{data.github}}</a> |
+                }
+
+                @if(data.website){
+                <a class="small word-wrap" [href]="data.website">{{data.website}}</a>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Summary -->
+    <section>
+        <h2>Summary</h2>
+        <p>{{data.summary}}</p>
+    </section>
+
+    <!-- Experience -->
+    <section>
+        <h2>Experience</h2>
+
+        @for(exp of data.experience;track exp){
+        <div class="section-block">
+            <strong>{{exp.role}}</strong> - {{exp.company}} ({{exp.year}})
+            <ul>
+                @for(d of exp.details;track d){
+                <li>{{d}}</li>
+                }
+            </ul>
+        </div>
+        }
+    </section>
+
+    <!-- Skills -->
+    <section>
+        <h2>Skills</h2>
+        <p class="skill-list">
+            {{ getSkillNames() }}
+        </p>
+    </section>
+
+    <!-- Education -->
+    <section>
+        <h2>Education</h2>
+        @for(edu of data.education; track edu){
+        <div class="section-block">
+            <strong>{{edu.degree}}</strong> – {{edu.university}} ({{edu.year}})
+            <p>GPA: {{edu.gpa}}</p>
+
+            <strong>Projects:</strong>
+            <ul>
+                @for(p of edu.projects; track p){
+                <li>{{p}}</li>
+                }
+
+            </ul>
+        </div>
+        }
+    </section>
+
+    <!-- Certifications -->
+    <section>
+        <h2>Certifications</h2>
+        <ul>
+            @for(c of data.certifications;track c){
+            <li>
+                {{c.name}} ({{c.year}}) – {{c.issuer}}
+            </li>
+            }
+        </ul>
+    </section>
+
+    <!-- Languages -->
+    <section>
+        <h2>Languages</h2>
+
+        <p class="skill-list">
+            {{ getLanguagesNames() }}
+        </p>
+
+    </section>
+
+    <!-- Interests -->
+    <section>
+        <h2>Interests</h2>
+        <p> {{ getInterestNames() }}</p>
+
+    </section>
+
+    <!-- References -->
+    <section>
+        <h2>References</h2>
+        @for(r of data.references;track r){
+        <div>
+            <strong>{{r.name}}</strong> — {{r.role}}
+            <p>Contact: {{r.contact}}</p>
+        </div>
+        }
+    </section>
+</div>

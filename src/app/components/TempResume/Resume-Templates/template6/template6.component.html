@@ -1,0 +1,181 @@
+<div class="resume-a4 template-screen">
+    <aside class="sidebar">
+        @if(data?.profilePicture){
+        <div class="photo-wrap">
+            <img [src]="data.profilePicture" alt="{{data.name}}" />
+        </div>
+        }
+
+
+        <h1 class="name">{{ data?.name }}</h1>
+        <p class="title">{{ data?.title }}</p>
+
+        <div class="contact">
+            <p class="line"><strong>Email:</strong> <a href="mailto:{{data?.email}}">{{ data?.email }}</a></p>
+            <p class="line"><strong>Phone:</strong> {{ data?.phone }}</p>
+            @if(data?.address){
+            <p class="line"><strong>Address:</strong> {{ data?.address }}</p>
+
+            }
+
+            <div class="links">
+                @if(data.linkedin){
+                <a [href]="data.linkedin">{{data.linkedin}}</a>
+                }
+                @if(data.github){
+                <a [href]="data.github">{{data.github}}</a>
+                }
+
+                @if(data.website){
+                <a [href]="data.website">{{data.website}}</a>
+                }
+            </div>
+        </div>
+        @if(normalizedSkills?.length){
+        <section class="card skills-card">
+            <h3>Skills</h3>
+            <ul>
+                @for(s of normalizedSkills;track s){
+                <li>{{ s }}</li>
+
+                }
+            </ul>
+        </section>
+        }
+
+        @if(data?.languages?.length){
+        <section class="card langs-card">
+            <h3>Languages</h3>
+            <ul>
+                @for(lang of data.languages; track lang){
+                <li>{{lang.name}} — {{lang.level}}</li>
+                }
+            </ul>
+        </section>
+        }
+
+
+        @if(data?.interests?.length){
+        <section class="card interests-card">
+            <h3>Interests</h3>
+            <ul>
+                @for(i of data.interests;track i){
+                <li>{{ i }}</li>
+                }
+            </ul>
+        </section>
+        }
+    </aside>
+
+    <main class="content">
+        <section class="hero">
+            @if(data?.summary){
+            <div class="summary-block">
+                <h2>Profile</h2>
+                <p>{{ data.summary }}</p>
+            </div>
+            }
+
+            @if(data?.objective){
+            <div class="objective">
+                <h5>Objective</h5>
+                <p>{{ data.objective }}</p>
+            </div>
+            }
+
+        </section>
+
+        @if(data?.experience?.length){
+        <section class="card experience-card">
+            <h2>Experience</h2>
+            @for(e of data.experience;track e){
+            <div class="exp-item">
+                <div class="exp-head">
+                    <div class="role">{{ e.role }}</div>
+                    <div class="company">
+                        {{ e.company }}
+                        <span class="year">• {{ e.year }}</span>
+                    </div>
+                </div>
+
+                <ul class="exp-details">
+                    @for(d of normalizeExperienceDetails(e);track d){
+                    <li>{{ d }}</li>
+
+                    }
+                </ul>
+            </div>
+            }
+
+        </section>
+        }
+        @if(data?.projects?.length){
+        <section class="card projects-card">
+            <h2>Projects</h2>
+            <ul>
+                @for(p of data.projects;track p){
+                <li>{{ p }}</li>
+                }
+
+            </ul>
+        </section>
+        }
+
+        @if(data?.education?.length){
+        <section class="card education-card">
+            <h2>Education</h2>
+            @for(edu of data.education;track edu){
+            <div class="edu-item">
+                <div class="edu-head">
+                    <div class="degree">{{ edu.degree }}</div>
+                    <div class="meta">{{ edu.university }} • {{ edu.year }}</div>
+                </div>
+                @if(edu.gpa){
+                <p><strong>GPA:</strong> {{ edu.gpa }}</p>
+                }
+
+
+                @if(edu.projects?.length){
+                <div>
+                    <strong>Projects:</strong>
+                    <ul>
+                        @for(p of edu.projects;track p){
+                        <li>{{ p }}</li>
+
+                        }
+                    </ul>
+                </div>
+                }
+            </div>
+            }
+
+        </section>
+        }
+        @if(data?.certifications?.length){
+        <section class="card certs-card">
+            <h2>Certifications</h2>
+            <ul>
+                @for(c of data.certifications;track c){
+                <li>
+                    <strong>{{ c.name }}</strong> — {{ c.issuer }} ({{ c.year }})
+                </li>
+                }
+
+            </ul>
+        </section>
+        }
+        @if(data?.references?.length){
+        <section class="card refs-card">
+            <h2>References</h2>
+            <ul>
+                @for(r of data.references;track r){
+                <li>
+                    <strong>{{ r.name }}</strong> — {{ r.role }} • {{ r.contact }}
+                </li>
+                }
+
+            </ul>
+        </section>
+        }
+    </main>
+</div>

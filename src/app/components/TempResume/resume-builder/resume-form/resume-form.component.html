@@ -1,0 +1,412 @@
+<form [formGroup]="resumeForm" class="resume-container">
+
+    <!-- BASIC INFO -->
+    <mat-card class="section-card">
+        <h2>Basic Information</h2>
+        <div class="grid-2  basic-info">
+
+            <div class="profile-box">
+                <!-- Image Preview -->
+                @if (profilePreview) {
+                <img [src]="profilePreview" class="profile-img" />
+                } @else {
+                <mat-icon>person</mat-icon>
+                }
+
+                <!-- Upload Button -->
+                <label class="upload-btn">
+                    <input type="file" accept="image/*" hidden (change)="onImageSelect($event)">
+                    Upload Photo
+                </label>
+            </div>
+
+
+
+            <div class="">
+                <div class="grid-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Title</mat-label>
+                        <input matInput formControlName="title">
+                    </mat-form-field>
+                </div>
+
+                <div class="grid-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="phone">
+                    </mat-form-field>
+                </div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="address">
+                </mat-form-field>
+            </div>
+
+        </div>
+    </mat-card>
+
+    <!-- SUMMARY -->
+    <mat-card class="section-card">
+        <h2>Summary</h2>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Summary</mat-label>
+            <textarea matInput formControlName="summary"></textarea>
+        </mat-form-field>
+    </mat-card>
+
+    <!-- SKILLS -->
+    <mat-card class="section-card">
+        <h2>
+            Skills
+            <button mat-icon-button color="primary" (click)="addSkill()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </h2>
+        <div formArrayName="skills">
+            @if (skillsArray.length === 0) {
+            <div class="empty-text">No skills added yet</div>
+            }
+
+            @for (skill of skillsArray.controls; let i = $index; track skill) {
+            <div class="skill-row" [formGroupName]="i">
+                <div class="grid-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Skill</mat-label>
+                        <input matInput formControlName="name">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Level</mat-label>
+                        <input matInput formControlName="level">
+                    </mat-form-field>
+                </div>
+
+                <button mat-icon-button color="warn" class="delete-btn" (click)="removeSkill(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+            }
+        </div>
+    </mat-card>
+
+    <!-- EXPERIENCE -->
+    <mat-card class="section-card">
+        <h2>
+            Experience
+            <button mat-icon-button color="primary" (click)="addExperience()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </h2>
+        <div formArrayName="experience">
+            @if (experienceArray.length === 0) {
+            <div class="empty-text">No experience added</div>
+            }
+
+            @for (exp of experienceArray.controls; let i = $index; track exp) {
+            <div class="exp-box" [formGroupName]="i">
+                <button mat-icon-button color="warn" (click)="removeExperience(i)"
+                    class="position-absolute end-0 top-0">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <div class="grid-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Company</mat-label>
+                        <input matInput formControlName="company">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Role</mat-label>
+                        <input matInput formControlName="role">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Year</mat-label>
+                        <input matInput formControlName="year">
+                    </mat-form-field>
+                </div>
+
+                <!-- RESPONSIBILITIES -->
+                <div formArrayName="responsibilities">
+                    <h4>Responsibilities</h4>
+                    @if (getResponsibilities(i).length === 0) {
+                    <div class="empty-text">No responsibilities added</div>
+                    }
+
+                    @for (res of getResponsibilities(i).controls; let j = $index; track res) {
+                    <div class="row-box">
+                        <div class="grid-1">
+                            <mat-form-field class="full-width" appearance="outline">
+
+                                <mat-label>Responsibility</mat-label>
+                                <input matInput [formControlName]="j">
+
+                            </mat-form-field>
+
+                        </div>
+                        <button mat-icon-button color="warn" class="delete-btn" (click)="removeResponsibility(i, j)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    }
+
+                    <button mat-button color="primary" (click)="addResponsibility(i)">Add Responsibility</button>
+                </div>
+
+                <!-- ACHIEVEMENTS -->
+                <div formArrayName="achievements">
+                    <h4>Achievements</h4>
+                    @if (getAchievements(i).length === 0) {
+                    <div class="empty-text">No achievements added</div>
+                    }
+
+                    @for (ach of getAchievements(i).controls; let k = $index; track ach) {
+                    <div class="row-box">
+                        <div class="grid-1">
+                            <mat-form-field class="full-width" appearance="outline">
+
+                                <mat-label>Achievement</mat-label>
+                                <input matInput [formControlName]="k">
+                            </mat-form-field>
+
+                        </div>
+                        <button mat-icon-button color="warn" (click)="removeAchievement(i, k)" class="delete-btn">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    }
+
+                    <button mat-button color="primary" (click)="addAchievement(i)">Add Achievement</button>
+                </div>
+
+                <!-- <button mat-icon-button color="warn" (click)="removeExperience(i)">
+                    <mat-icon>delete</mat-icon>
+                </button> -->
+            </div>
+            }
+        </div>
+    </mat-card>
+
+    <!-- EDUCATION -->
+    <mat-card class="section-card">
+        <h2>
+            Education
+            <button mat-icon-button color="primary" (click)="addEducation()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </h2>
+        <div formArrayName="education">
+            @if (educationArray.length === 0) {
+            <div class="empty-text">No education added</div>
+            }
+
+            @for (ed of educationArray.controls; let i = $index; track ed) {
+            <div class="exp-box" [formGroupName]="i">
+                <button mat-icon-button color="warn" (click)="removeEducation(i)" class="position-absolute end-0 top-0">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <div class="grid-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Degree</mat-label>
+                        <input matInput formControlName="degree">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>University</mat-label>
+                        <input matInput formControlName="university">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Year</mat-label>
+                        <input matInput formControlName="year">
+                    </mat-form-field>
+                </div>
+
+                <!-- PROJECTS -->
+                <div formArrayName="projects">
+                    <h4>Projects</h4>
+                    @if (getProjects(i).length === 0) {
+                    <div class="empty-text">No projects added</div>
+                    }
+
+                    @for (proj of getProjects(i).controls; let j = $index; track proj) {
+                    <div class="row-box">
+                        <div class="grid-1">
+                            <mat-form-field class="full-width" appearance="outline">
+                                <mat-label>Project</mat-label>
+                                <input matInput [formControlName]="j">
+                            </mat-form-field>
+                        </div>
+                        <button mat-icon-button color="warn" (click)="removeProject(i, j)" class="delete-btn">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    }
+
+                    <button mat-button color="primary" (click)="addProject(i)">Add Project</button>
+                </div>
+
+                <!-- <button mat-icon-button color="warn" (click)="removeEducation(i)" class="position-absolute end-0 ps-4">
+                    <mat-icon>delete</mat-icon>
+                </button> -->
+            </div>
+            }
+        </div>
+    </mat-card>
+
+    <!-- CERTIFICATIONS -->
+    <mat-card class="section-card">
+        <h2>
+            Certifications
+            <button mat-icon-button color="primary" (click)="addCertification()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </h2>
+        <div formArrayName="certifications">
+            @if (certificationsArray.length === 0) {
+            <div class="empty-text">No certifications added</div>
+            }
+
+            @for (cert of certificationsArray.controls; let i = $index; track cert) {
+            <div class="grid-3 position-relative pe-5" [formGroupName]="i">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Year</mat-label>
+                    <input matInput formControlName="year">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Issuer</mat-label>
+                    <input matInput formControlName="issuer">
+                </mat-form-field>
+
+                <button mat-icon-button color="warn" (click)="removeCertification(i)"
+                    class="position-absolute top-50 end-0 translate-middle-y me-2">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+            }
+        </div>
+    </mat-card>
+
+    <!-- LANGUAGES -->
+    <mat-card class="section-card">
+        <h2>
+            Languages
+            <button mat-icon-button color="primary" (click)="addLanguage()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </h2>
+        <div formArrayName="languages">
+            @if (languagesArray.length === 0) {
+            <div class="empty-text">No languages added</div>
+            }
+
+            @for (lang of languagesArray.controls; let i = $index; track lang) {
+            <div class="grid-2 position-relative pe-5" [formGroupName]="i">
+                <mat-form-field appearance="outline">
+                    <mat-label>Language</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Level</mat-label>
+                    <input matInput formControlName="level">
+                </mat-form-field>
+
+                <button mat-icon-button color="warn" (click)="removeLanguage(i)"
+                    class="position-absolute top-50 end-0 translate-middle-y me-2">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+            }
+        </div>
+    </mat-card>
+
+    <!-- INTERESTS -->
+    <mat-card class="section-card">
+        <h2>
+            Interests
+            <button mat-icon-button color="primary" (click)="addInterest()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </h2>
+        <div formArrayName="interests">
+            @if (interestsArray.length === 0) {
+            <div class="empty-text">No interests added</div>
+            }
+
+            @for (int of interestsArray.controls; let i = $index; track int) {
+            <div class="row-box">
+                <mat-form-field class="full-width">
+                    <mat-label>Interest</mat-label>
+                    <input matInput [formControlName]="i">
+                </mat-form-field>
+                <button mat-icon-button color="warn" (click)="removeInterest(i)" class="delete-btn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            }
+        </div>
+    </mat-card>
+
+    <!-- REFERENCES -->
+    <mat-card class="section-card">
+        <h2>
+            References
+            <button mat-icon-button color="primary" (click)="addReference()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </h2>
+        <div formArrayName="references">
+            @if (referencesArray.length === 0) {
+            <div class="empty-text">No references added</div>
+            }
+
+            @for (ref of referencesArray.controls; let i = $index; track ref) {
+            <div class="grid-3 position-relative pe-5" [formGroupName]="i">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <input matInput formControlName="role">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Contact</mat-label>
+                    <input matInput formControlName="contact">
+                </mat-form-field>
+
+                <button mat-icon-button color="warn" (click)="removeReference(i)"
+                    class="position-absolute top-50 end-0 translate-middle-y me-2">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+            }
+        </div>
+    </mat-card>
+    <button mat-raised-button color="primary" (click)="submitForm()">
+        Submit
+    </button>
+
+</form>

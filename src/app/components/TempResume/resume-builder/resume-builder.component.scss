@@ -1,0 +1,97 @@
+// .thumbnails {
+//     max-height: 400px;
+//     /* jitna height chahiye */
+//     overflow-y: auto;
+//     /* vertical scroll enable karega */
+// }
+
+// .thumb {
+//     margin-bottom: 10px;
+//     /* thumbnails ke beech thoda gap */
+//     cursor: pointer;
+//     /* hover me pointer */
+// }
+// .btn-template-img {
+//     width: 100%;
+//     /* column jitni width ho utni le */
+//     height: 100%;
+//     /* aspect ratio maintain rahe */
+//     object-fit: cover;
+//     /* image box ko nicely fill kare */
+//     border-radius: 8px;
+// }
+
+.preview-box {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    /* resume jesa ratio */
+    padding: 6px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.preview-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Image styling */
+.resume-template {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* IMPORTANT */
+}
+
+
+// popup
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    background: #fff;
+    padding: 10px;
+    border-radius: 12px;
+    overflow: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Preview */
+.popup-img {
+    width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+/* Close Button */
+.close-btn {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    background: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 50%;
+    padding: 8px 12px;
+    cursor: pointer;
+}

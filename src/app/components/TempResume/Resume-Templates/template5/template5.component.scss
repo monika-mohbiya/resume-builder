@@ -1,0 +1,57 @@
+// .t5 {
+//     border: 2px solid black;
+//     padding: 20px;
+// }
+
+.resume-grid {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 20px;
+}
+
+.left-panel {
+    background: #f6f6f6;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.right-panel {
+    padding: 10px;
+}
+
+.profile-pic {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section h3 {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+}
+
+.exp-box {
+    margin-bottom: 15px;
+}
+
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+
+.edu-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.edu-table th,
+.edu-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}

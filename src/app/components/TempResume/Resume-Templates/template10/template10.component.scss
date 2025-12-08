@@ -1,0 +1,69 @@
+.resume-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    overflow: hidden;
+}
+
+.left {
+    background: #f4f4f4;
+    padding: 30px;
+}
+
+.right {
+    padding: 30px;
+}
+
+.profile img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.profile h2 {
+    margin: 5px 0;
+}
+
+.designation {
+    color: #7b79ff;
+    font-weight: bold;
+}
+
+.section h3 {
+    border-bottom: 2px solid #d7d7ff;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    color: #4a3aff;
+}
+
+.section ul {
+    padding-left: 20px;
+}
+
+.right h2 {
+    margin-top: 20px;
+    color: #4a3aff;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.box {
+    margin-bottom: 20px;
+}
+
+.year {
+    color: #777;
+    font-size: 13px;
+}
+
+.summary {
+    color: #444;
+    margin-bottom: 15px;
+}
+
+@media print {
+    .resume-container {
+        box-shadow: none;
+    }
+}

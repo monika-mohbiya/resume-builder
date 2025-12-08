@@ -1,0 +1,149 @@
+<div class="template-screen">
+
+    <!-- ================= Header ================= -->
+    <h2>{{data.name}}</h2>
+    <h4>{{data.title}}</h4>
+
+    <!-- Contact Info -->
+    <div class="contact">
+        <p>{{data.email}}</p>
+        <p>{{data.phone}}</p>
+        @if(data.address){
+        <p>{{data.address}}</p>
+        }
+    </div>
+
+    <!-- ================= Summary ================= -->
+    <section>
+        <h5>Professional Summary</h5>
+        <p>{{data.summary}}</p>
+    </section>
+
+    <!-- ================= Skills ================= -->
+    <section>
+        <h5>Skills</h5>
+        <ul>
+            @for(s of data.skills;track s){
+            <li>{{s.name}}-{{s.level}}</li>
+            }
+        </ul>
+    </section>
+
+    <!-- ================= Work Experience ================= -->
+    <div class="section">
+        <h3>Experience</h3>
+
+        @for(exp of data.experience; track exp){
+        <div class="exp-box">
+            <div class="exp-header">
+                <strong>{{exp.role}}</strong> – {{exp.company}}
+                <span class="year">{{exp.year}}</span>
+            </div>
+
+            <div class="exp-table">
+
+                <h6>Responsibilities</h6>
+                <ul>
+                    @for(r of exp.responsibilities; track r){
+                    <li>{{r}}</li>
+                    }
+                </ul>
+
+                <h6>Achievements</h6>
+                <ul>
+                    @for(a of exp.achievements; track a){
+                    <li>{{a}}</li>
+                    }
+                </ul>
+
+            </div>
+        </div>
+        }
+    </div>
+
+
+    <!-- ================= Education ================= -->
+    <section>
+        <h5>Education</h5>
+        @for(edu of data.education; track edu){
+        <div class="edu-block">
+            <p><strong>{{edu.degree}}</strong> — {{edu.university}} ({{edu.year}})</p>
+            <p>GPA: {{edu.gpa}}</p>
+
+            <strong>Projects:</strong>
+            <ul>
+                @for(p of edu.projects; track p){
+                <li>{{p}}</li>
+                }
+            </ul>
+        </div>
+        }
+    </section>
+
+    <!-- ================= Projects (Optional) ================= -->
+    @if(data.projects?.length){
+    <section>
+        <h5>Projects</h5>
+        <ul>
+            @for(p of data.projects; track p){
+            <li>{{p}}</li>
+            }
+        </ul>
+    </section>
+    }
+
+    <!-- ================= Certifications ================= -->
+    <section>
+        <h5>Certifications</h5>
+        <ul>
+            @for(c of data.certifications; track c){
+            <li><strong>{{c.name}}</strong> ({{c.year}}) — {{c.issuer}}</li>
+            }
+        </ul>
+    </section>
+
+    <!-- ================= Portfolio Links ================= -->
+    <section>
+        <h5>Portfolio</h5>
+        @if(data.linkedin){
+        <p>LinkedIn: <a class="small word-wrap" [href]="data.linkedin">{{data.linkedin}}</a></p>
+        }
+        @if(data.github){
+        <p>GitHub: <a class="small word-wrap" [href]="data.github">{{data.github}}</a></p>
+        }
+        @if(data.website){
+        <p>Website: <a class="small word-wrap" [href]="data.website">{{data.website}}</a></p>
+        }
+    </section>
+
+    <!-- ================= Languages ================= -->
+    <section>
+        <h5>Languages</h5>
+        <ul>
+            @for(lang of data.languages; track lang){
+            <li>{{lang.name}} — {{lang.level}}</li>
+            }
+        </ul>
+    </section>
+
+    <!-- ================= Interests ================= -->
+    <section>
+        <h5>Interests</h5>
+        <ul>
+            @for(i of data.interests; track i){
+            <li>{{i}}</li>
+            }
+        </ul>
+    </section>
+
+    <!-- ================= References ================= -->
+    <section>
+        <h5>References</h5>
+        @for(ref of data.references; track ref){
+        <p>
+            <strong>{{ref.name}}</strong> — {{ref.role}} <br>
+            <span>Contact: {{ref.contact}}</span>
+        </p>
+        }
+    </section>
+</div>

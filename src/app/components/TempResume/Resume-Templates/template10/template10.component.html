@@ -1,0 +1,149 @@
+<div class="resume-container template-screen">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="left">
+        <div class="profile">
+            @if(data.profilePicture){
+            <img [src]="data.profilePicture" alt="Profile Picture">
+            }
+            <h2>{{ data.name }}</h2>
+            <p class="designation">{{ data.title }}</p>
+        </div>
+
+        <div class="section">
+            <h3>Contact</h3>
+            <p><b>Email:</b> {{ data.email }}</p>
+            <p><b>Phone:</b> {{ data.phone }}</p>
+            <p><b>Address:</b> {{ data.address }}</p>
+            @if(data.linkedin){
+            <p><b>LinkedIn:</b><br>
+                <a class="small word-wrap" [href]="data.linkedin">{{data.linkedin}}</a>
+            </p>
+            }
+            @if(data.github){
+            <p><b>Github:</b><br>
+                <a class="small word-wrap" [href]="data.github">{{data.github}}</a>
+            </p>
+            }
+            @if(data.website){
+            <p><b>Website:</b><br>
+                <a class="small word-wrap" [href]="data.website">{{data.website}}</a>
+            </p>
+            }
+        </div>
+
+        <div class="section">
+            <h3>Skills</h3>
+            <ul>
+                @for(skill of data.skills;track skill){
+                <li>{{skill.name}}</li>
+                }
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Languages</h3>
+            <ul>
+                @for(ln of data.languages;track ln){
+                <li>
+                    {{ln.name}} — {{ln.level}}
+                </li>
+                }
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Interests</h3>
+            <ul>
+                @for(i of data.interests;track i){
+                <li>{{ i }}</li>
+                }
+
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- RIGHT MAIN SECTION -->
+    <div class="right">
+        <h2>Profile Summary</h2>
+        <p class="summary">{{ data.summary }}</p>
+
+        <h2>Objective</h2>
+        <p class="summary">{{ data.objective }}</p>
+
+        <div class="section">
+            <h3>Experience</h3>
+            @for(exp of data.experience; track exp){
+            <div class="exp-box">
+                <div class="exp-header">
+                    <strong>{{exp.role}}</strong> – {{exp.company}}
+                    <span class="year">{{exp.year}}</span>
+                </div>
+
+                <div class="exp-table">
+
+                    <h6>Responsibilities</h6>
+                    <ul>
+                        @for(r of exp.responsibilities; track r){
+                        <li>{{r}}</li>
+                        }
+                    </ul>
+
+                    <h6>Achievements</h6>
+                    <ul>
+                        @for(a of exp.achievements; track a){
+                        <li>{{a}}</li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+            }
+
+        </div>
+        <div class="section">
+            <h3>Education</h3>
+            @for(edu of data.education; track edu){
+            <div class="box">
+                <strong>{{edu.degree}}</strong> – {{edu.university}} ({{edu.year}})
+                <p>GPA: {{edu.gpa}}</p>
+
+                <strong>Projects:</strong>
+                <ul>
+                    @for(p of edu.projects; track p){
+                    <li>{{p}}</li>
+                    }
+
+                </ul>
+            </div>
+            }
+        </div>
+        <div class="section">
+            <!-- Certifications -->
+            <h3>Certifications</h3>
+            <div class="box">
+                <ul>
+                    @for(c of data.certifications;track c){
+                    <li>
+                        {{c.name}} ({{c.year}}) – {{c.issuer}}
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <!-- References -->
+            <h3>References</h3>
+            @for(r of data.references;track r){
+            <div class="box">
+                <strong>{{r.name}}</strong> — {{r.role}}
+                <p>Contact: {{r.contact}}</p>
+            </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+        <!-- <app-resume-form class=""></app-resume-form> -->
+    </div>
+</div>
+<div class="row">
+    <div class="templates col-12 thumbnails">
+        <!-- <div class="row g-3">
+            @for(t of templates;track t){
+            <div class="col-2">
+                <div class="card thumb h-100 w-100">
+                    <div (click)="loadTemplate(t)">
+                        <img [src]="t.preview" class="btn-template-img" />
+                    </div>
+                </div>
+            </div>
+            }
+        </div> -->
+
+        <div class="row g-2 justify-content-center">
+            @for(t of templates;track t){
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
+                <div class="preview-box" (click)="openImage(t)">
+                    <img [src]="t.preview" class="resume-template" (load)="this.service.hide()" />
+                </div>
+            </div>
+            }
+        </div>
+
+
+
+
+    </div>
+
+
+</div>
+
+<!-- POPUP TEMPLATE -->
+<ng-template #imgPopup let-data>
+    <div class="popup-overlay">
+
+        <button class="close-btn" (click)="closePopup()">✖</button>
+
+        <div class="popup-content">
+            <div class="d-flex p-2 justify-content-between">
+                <div>
+
+                </div>
+                <div class="">
+                    <button class="btn btn-primary d-flex align-self-center blue-color" (click)="exportPDF()"><mat-icon
+                            class="">download</mat-icon> <span class="">Download</span> </button>
+
+                </div>
+            </div>
+            <hr class="">
+            @if (!resumeData) {
+            <img [src]="data" class="popup-img" />
+            }
+            @else {
+            <div class="preview-area">
+                <div class="resume-root">
+                    <ng-container #preview></ng-container>
+                </div>
+
+            </div>
+            }
+
+        </div>
+
+    </div>
+</ng-template>

@@ -1,0 +1,44 @@
+ 
+
+.ribbon-sidebar {
+    width: 260px;
+    padding: 30px 20px;
+    background: linear-gradient(180deg, #4B70F5, #6C8CFF);
+    color: #fff;
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+}
+
+.ribbon-sidebar img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    margin-bottom: 10px;
+}
+
+.side-block h5 {
+    margin-bottom: 5px;
+    padding-bottom: 3px;
+    text-decoration: underline;
+}
+
+.side-block p,
+.side-block a {
+    margin: 4px 0;
+    color: #fff;
+    text-decoration: none;
+}
+
+.content-area {
+    flex: 1;
+    padding: 35px;
+}
+
+.box {
+    background: #fff;
+    padding: 15px;
+    border-left: 5px solid #4B70F5;
+    margin-top: 15px;
+    border-radius: 8px;
+}

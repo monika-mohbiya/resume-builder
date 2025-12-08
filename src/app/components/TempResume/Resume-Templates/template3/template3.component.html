@@ -1,0 +1,128 @@
+<div class="template-screen d-flex">
+    <!-- LEFT SIDEBAR -->
+    <div class="left">
+        <!-- @if(data.profilePicture){
+        <img [src]="data.profilePicture" alt="Profile Picture" class="profile-img" />
+
+        } -->
+
+        <h2>{{data.name}}</h2>
+        <h6>{{data.title}}</h6>
+
+        <div class="contact">
+            <h5 class="text-decoration-underline">Contact</h5>
+            @if(data.email){
+            <span class="small word-wrap">{{data.email}}</span><br>
+            }
+            @if(data.phone){
+            <span class="small word-wrap">{{data.phone}}</span><br>
+            }
+            @if(data.address){
+            <span class="small word-wrap">{{data.address}}</span><br>
+            }
+
+
+        </div>
+        <div class="urls">
+            <h5 class="text-decoration-underline">Urls</h5>
+            @if(data.linkedin){
+            <p>LinkedIn: <a class="small word-wrap" [href]="data.linkedin">{{data.linkedin}}</a></p>
+            }
+            @if(data.github){
+            <p>GitHub: <a class="small word-wrap" [href]="data.github">{{data.github}}</a></p>
+            }
+            @if(data.website){
+            <p>Website: <a class="small word-wrap" [href]="data.website">{{data.website}}</a></p>
+            }
+
+        </div>
+
+        <!-- Skills -->
+        <h5 class="text-decoration-underline">Skills</h5>
+        <ul>
+            @for(s of data.skills;track s){
+            <li>{{s}}</li>
+            }
+        </ul>
+
+        <!-- Languages -->
+        <h5>Languages</h5>
+        <ul>
+            @for(ln of data.languages;track ln){
+            <li>
+                {{ln.name}} — {{ln.level}}
+            </li>
+            }
+        </ul>
+
+        <!-- Interests -->
+        <h5>Interests</h5>
+        <ul>
+            @for(i of data.interests;track i){
+            <li>{{i}}</li>
+            }
+
+        </ul>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="right">
+        <!-- Summary -->
+        <h5>Summary</h5>
+        <p>{{data.summary}}</p>
+
+        <!-- Objective -->
+        <h5>Objective</h5>
+        <p>{{data.objective}}</p>
+
+        <!-- Experience -->
+        <h5>Experience</h5>
+        @for(exp of data.experience;track exp){
+        <div class="experience-block">
+            <strong>{{exp.role}}</strong> ({{exp.year}})
+            <p>{{exp.company}}</p>
+            <ul>
+                @for(d of exp.details;track d){
+                <li>{{d}}</li>
+                }
+            </ul>
+        </div>
+        }
+
+        <!-- Education -->
+        <h5>Education</h5>
+        @for(edu of data.education; track edu){
+        <div class="section-block">
+            <strong>{{edu.degree}}</strong> – {{edu.university}} ({{edu.year}})
+            <p>GPA: {{edu.gpa}}</p>
+
+            <strong>Projects:</strong>
+            <ul>
+                @for(p of edu.projects; track p){
+                <li>{{p}}</li>
+                }
+
+            </ul>
+        </div>
+        }
+
+        <!-- Certifications -->
+        <h5>Certifications</h5>
+        <ul>
+            @for(c of data.certifications;track c){
+            <li>
+                {{c.name}} ({{c.year}}) – {{c.issuer}}
+            </li>
+            }
+        </ul>
+
+        <!-- References -->
+        <h5>References</h5>
+        @for(r of data.references;track r){
+        <div>
+            <strong>{{r.name}}</strong> — {{r.role}}
+            <p>Contact: {{r.contact}}</p>
+        </div>
+        }
+    </div>
+</div>

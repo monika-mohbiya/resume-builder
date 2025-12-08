@@ -1,0 +1,16 @@
+.main-toolbarheader {
+    display: flex;
+    align-items: center;
+}
+
+.app-title {
+    flex: 1;
+    /* ye title ko left me rakhega */
+}
+
+.nav-links {
+    margin-left: auto;
+    /* ye buttons ko right me push karega */
+    display: flex;
+    gap: 10px;
+}

@@ -1,0 +1,71 @@
+.top-section {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.info h1 {
+    font-size: 32px;
+    margin: 0;
+}
+
+.info h3 {
+    margin: 5px 0;
+    color: #4B70F5;
+}
+
+.tags span {
+    background: #4B70F5;
+    padding: 5px 10px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 6px;
+    margin-right: 8px;
+}
+
+.links a {
+    margin-right: 10px;
+    color: #4B70F5;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+section {
+    margin-top: 30px;
+}
+
+section h2 {
+    color: #4B70F5;
+    border-left: 4px solid #4B70F5;
+    padding-left: 10px;
+    font-size: 22px;
+}
+
+.card {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    margin-top: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+.card .year {
+    float: right;
+    color: #4B70F5;
+    font-weight: bold;
+}
+
+.company {
+    color: #555;
+    margin-top: -8px;
+}
