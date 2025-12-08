@@ -123,7 +123,9 @@ export class ResumeBuilderComponent {
   // };
 
 
-  @ViewChild('preview', { read: ViewContainerRef }) preview!: ViewContainerRef;
+  @ViewChild('preview', { read: ViewContainerRef, static: false })
+  preview!: ViewContainerRef;
+
   constructor(private dialog: MatDialog) { }
 
 
@@ -181,20 +183,24 @@ export class ResumeBuilderComponent {
       data: data.preview
     });
 
-    // ✅ Hide loader after popup opens
     this.dialogRef.afterOpened().subscribe(() => {
       this.service.hide();
 
-      // If resume data exists, load component preview
       if (this.resumeData) {
-        this.preview.clear();
+        setTimeout(() => {
+          if (this.preview) {
+            this.preview.clear();
 
-        const compRef = this.preview.createComponent<TemplateComponent>(data.component);
-        compRef.instance.data = { ...this.resumeData };
-        compRef.changeDetectorRef.detectChanges();
+            const compRef =
+              this.preview.createComponent<TemplateComponent>(data.component);
+            compRef.instance.data = { ...this.resumeData };
+            compRef.changeDetectorRef.detectChanges();
+          }
+        }, 0);
       }
     });
   }
+
 
 
 
