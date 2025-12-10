@@ -71,12 +71,22 @@
 }
 
 .delete-btn {
-    align-self: center;
+    align-self: auto;
     /* icon vertically center rahe */
     margin-top: 0;
     /* remove extra margin */
     flex-shrink: 0;
     /* squeeze na ho */
+}
+
+.delete-btn3 {
+    align-self: self-start !important;
+}
+
+.delete-btn2 {
+    position: absolute !important;
+    top: 25px !important;
+    right: 0 !important;
 }
 
 .language-row {
@@ -91,6 +101,13 @@
     flex: 1;
 }
 
+.basic-info {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    /* profile + form */
+    gap: 20px;
+}
+
 .profile-box {
     width: 150px;
     height: 180px;
@@ -102,13 +119,19 @@
     justify-content: center;
     gap: 10px;
     background: #fafafa;
+    text-align: center;
 }
 
 .profile-img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Make full width inputs */
+.full-width {
+    width: 100%;
 }
 
 .upload-btn {
@@ -117,15 +140,8 @@
     font-weight: 500;
 }
 
-.basic-info {
-    display: grid !important;
-    grid-template-columns: 200px 1fr !important; // left fixed, right flexible
-    gap: 16px !important; // space kam
-    align-items: start !important;
-}
-
 /* Responsive for mobile */
-@media (max-width: 768px) {
+@media (max-width: 425px) {
     .language-row {
         flex-direction: column;
         align-items: stretch;
@@ -133,5 +149,38 @@
 
     .language-row button {
         align-self: flex-end;
+    }
+
+    .basic-info {
+        grid-template-columns: 1fr;
+        /* stack image & form vertically */
+        text-align: center;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+        /* one input per row */
+    }
+
+    .grid-3 {
+        display: block !important;
+    }
+
+    .profile-img {
+        margin: auto;
+    }
+
+    .upload-btn {
+        display: inline-block;
+        margin-top: 8px;
+    }
+
+    .mat-form-field {
+        width: 100%;
+    }
+
+    .delete-btn2 {
+        position: absolute;
+        top: -22px !important;
     }
 }

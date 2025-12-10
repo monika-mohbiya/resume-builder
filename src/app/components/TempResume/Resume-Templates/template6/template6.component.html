@@ -11,8 +11,12 @@
         <p class="title">{{ data?.title }}</p>
 
         <div class="contact">
+            @if(data?.email){
             <p class="line"><strong>Email:</strong> <a href="mailto:{{data?.email}}">{{ data?.email }}</a></p>
+            }
+            @if(data?.phone){
             <p class="line"><strong>Phone:</strong> {{ data?.phone }}</p>
+            }
             @if(data?.address){
             <p class="line"><strong>Address:</strong> {{ data?.address }}</p>
 
@@ -31,13 +35,12 @@
                 }
             </div>
         </div>
-        @if(normalizedSkills?.length){
+        @if(data?.skills?.length){
         <section class="card skills-card">
             <h3>Skills</h3>
             <ul>
-                @for(s of normalizedSkills;track s){
-                <li>{{ s }}</li>
-
+                @for(skill of data.skills;track skill){
+                <li>{{skill.name}}</li>
                 }
             </ul>
         </section>
@@ -48,7 +51,7 @@
             <h3>Languages</h3>
             <ul>
                 @for(lang of data.languages; track lang){
-                <li>{{lang.name}} — {{lang.level}}</li>
+                <li>{{lang.name}} </li>
                 }
             </ul>
         </section>
@@ -88,22 +91,31 @@
         @if(data?.experience?.length){
         <section class="card experience-card">
             <h2>Experience</h2>
-            @for(e of data.experience;track e){
+            @for(exp of data.experience;track exp){
             <div class="exp-item">
                 <div class="exp-head">
-                    <div class="role">{{ e.role }}</div>
+                    <div class="role">{{ exp.role }}</div>
                     <div class="company">
-                        {{ e.company }}
-                        <span class="year">• {{ e.year }}</span>
+                        {{ exp.company }}
+                        <span class="year">• {{ exp.year }}</span>
                     </div>
                 </div>
-
-                <ul class="exp-details">
-                    @for(d of normalizeExperienceDetails(e);track d){
-                    <li>{{ d }}</li>
-
+                @if(exp?.responsibilities?.length){
+                <h6>Responsibilities</h6>
+                <ul>
+                    @for(r of exp.responsibilities; track r){
+                    <li>{{r}}</li>
                     }
                 </ul>
+                }
+                @if(exp?.achievements?.length){
+                <h6>Achievements</h6>
+                <ul>
+                    @for(a of exp.achievements; track a){
+                    <li>{{a}}</li>
+                    }
+                </ul>
+                }
             </div>
             }
 

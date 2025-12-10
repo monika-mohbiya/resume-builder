@@ -2,14 +2,21 @@
     <div class="header">
         <h1>{{data.name}}</h1>
         <span class="">{{data.title}}</span><br>
-        <span class="">{{data.address}}</span><br>
-        <span class="">Email: {{data.email}}</span><br>
-        <span class="">Phone: {{data.phone}}</span>
+        @if(data.address){
+        <span class="small word-wrap">{{data.address}}</span><br>
+        }
+        @if(data.email){
+        <span class="small word-wrap">Email: {{data.email}}</span><br>
+        }
+        @if(data.phone){
+        <span class="small word-wrap">Phone: {{data.phone}}</span>
+        }
     </div>
 
     <div class="body d-flex">
         <!-- LEFT SIDEBAR -->
         <div class="left">
+            @if(data.linkedin || data.github || data.website){
             <h3 class="">Urls</h3>
             <div class="links">
                 <p class="">
@@ -25,26 +32,29 @@
                     }
                 </p>
             </div>
-
+            }
             <!-- Skills -->
+            @if(data?.skills?.length){
             <h3>Skills</h3>
             <ul>
                 @for(skill of data.skills;track skill){
                 <li>{{skill.name}}</li>
                 }
             </ul>
-
+            }
             <!-- Languages -->
+            @if(data.languages?.length){
             <h3>Languages</h3>
             <ul>
                 @for(ln of data.languages;track ln){
                 <li>
-                    {{ln.name}} — {{ln.level}}
+                    {{ln.name}}
                 </li>
                 }
             </ul>
-
+            }
             <!-- Interests -->
+            @if(data.interests?.length){
             <h3>Interests</h3>
             <ul>
                 @for(i of data.interests;track i){
@@ -52,19 +62,27 @@
                 }
 
             </ul>
+            }
         </div>
 
         <!-- RIGHT CONTENT -->
         <div class="right">
             <!-- Summary -->
-            <h3>Summary</h3>
+            @if(data.summary){
+            <h5>Summary</h5>
             <p>{{data.summary}}</p>
+            }
+
 
             <!-- Objective -->
-            <h3>Objective</h3>
+            @if(data.objective){
+            <h5>Objective</h5>
             <p>{{data.objective}}</p>
+            }
 
             <!-- Experience -->
+
+            @if(data?.experience?.length){
             <h3>Experience</h3>
             @for(exp of data.experience; track exp){
             <div class="exp-box">
@@ -74,32 +92,36 @@
                 </div>
 
                 <div class="exp-table">
-
+                    @if(exp?.responsibilities?.length){
                     <h6>Responsibilities</h6>
                     <ul>
                         @for(r of exp.responsibilities; track r){
                         <li>{{r}}</li>
                         }
                     </ul>
-
+                    }
+                    @if(exp?.achievements?.length){
                     <h6>Achievements</h6>
                     <ul>
                         @for(a of exp.achievements; track a){
                         <li>{{a}}</li>
                         }
                     </ul>
-
+                    }
                 </div>
             </div>
             }
-
+            }
             <!-- Education -->
+            @if(data?.education?.length){
             <h3>Education</h3>
             @for(edu of data.education; track edu){
             <div class="section-block">
                 <strong>{{edu.degree}}</strong> – {{edu.university}} ({{edu.year}})
+                @if(edu.gpa){
                 <p>GPA: {{edu.gpa}}</p>
-
+                }
+                @if(edu?.projects?.length) {
                 <strong>Projects:</strong>
                 <ul>
                     @for(p of edu.projects; track p){
@@ -107,10 +129,12 @@
                     }
 
                 </ul>
+                }
             </div>
             }
-
+            }
             <!-- Certifications -->
+            @if(data.certifications?.length){
             <h3>Certifications</h3>
             <ul>
                 @for(c of data.certifications;track c){
@@ -119,14 +143,16 @@
                 </li>
                 }
             </ul>
-
+            }
             <!-- References -->
+            @if(data.references?.length){
             <h3>References</h3>
             @for(r of data.references;track r){
             <div>
                 <strong>{{r.name}}</strong> — {{r.role}}
                 <p>Contact: {{r.contact}}</p>
             </div>
+            }
             }
         </div>
     </div>

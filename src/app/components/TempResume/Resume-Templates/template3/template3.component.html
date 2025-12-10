@@ -9,6 +9,7 @@
         <h2>{{data.name}}</h2>
         <h6>{{data.title}}</h6>
 
+        @if(data.email || data.phone || data.address){
         <div class="contact">
             <h5 class="text-decoration-underline">Contact</h5>
             @if(data.email){
@@ -20,42 +21,45 @@
             @if(data.address){
             <span class="small word-wrap">{{data.address}}</span><br>
             }
-
-
         </div>
+        }
+        @if(data.linkedin || data.github || data.website){
         <div class="urls">
             <h5 class="text-decoration-underline">Urls</h5>
             @if(data.linkedin){
-            <p>LinkedIn: <a class="small word-wrap" [href]="data.linkedin">{{data.linkedin}}</a></p>
+            <p>LinkedIn: <a class="small word-wrap">{{data.linkedin}}</a></p>
             }
             @if(data.github){
-            <p>GitHub: <a class="small word-wrap" [href]="data.github">{{data.github}}</a></p>
+            <p>GitHub: <a class="small word-wrap">{{data.github}}</a></p>
             }
             @if(data.website){
-            <p>Website: <a class="small word-wrap" [href]="data.website">{{data.website}}</a></p>
+            <p>Website: <a class="small word-wrap">{{data.website}}</a></p>
             }
 
         </div>
+        }
+
 
         <!-- Skills -->
+        @if(data?.skills?.length){
         <h5 class="text-decoration-underline">Skills</h5>
         <ul>
             @for(s of data.skills;track s){
             <li>{{s}}</li>
             }
         </ul>
-
+        }
         <!-- Languages -->
+        @if(data.languages?.length){
         <h5>Languages</h5>
         <ul>
             @for(ln of data.languages;track ln){
-            <li>
-                {{ln.name}} — {{ln.level}}
-            </li>
+            <li> {{ln.name}} </li>
             }
         </ul>
-
+        }
         <!-- Interests -->
+        @if(data.interests?.length){
         <h5>Interests</h5>
         <ul>
             @for(i of data.interests;track i){
@@ -63,39 +67,52 @@
             }
 
         </ul>
+        }
     </div>
 
     <!-- RIGHT CONTENT -->
     <div class="right">
         <!-- Summary -->
+        @if(data.summary){
         <h5>Summary</h5>
         <p>{{data.summary}}</p>
+        }
+
 
         <!-- Objective -->
+        @if(data.objective){
         <h5>Objective</h5>
         <p>{{data.objective}}</p>
+        }
 
         <!-- Experience -->
+        @if(data.experience?.length){
         <h5>Experience</h5>
         @for(exp of data.experience;track exp){
         <div class="experience-block">
             <strong>{{exp.role}}</strong> ({{exp.year}})
             <p>{{exp.company}}</p>
+            @if(exp.details?.length){
+            <h6>Responsibilities</h6>
             <ul>
                 @for(d of exp.details;track d){
                 <li>{{d}}</li>
                 }
             </ul>
+            }
         </div>
         }
-
+        }
         <!-- Education -->
+        @if(data?.education?.length){
         <h5>Education</h5>
         @for(edu of data.education; track edu){
         <div class="section-block">
             <strong>{{edu.degree}}</strong> – {{edu.university}} ({{edu.year}})
+            @if(edu.gpa){
             <p>GPA: {{edu.gpa}}</p>
-
+            }
+            @if(edu?.projects?.length) {
             <strong>Projects:</strong>
             <ul>
                 @for(p of edu.projects; track p){
@@ -103,10 +120,13 @@
                 }
 
             </ul>
+            }
         </div>
+        }
         }
 
         <!-- Certifications -->
+        @if(data.certifications?.length){
         <h5>Certifications</h5>
         <ul>
             @for(c of data.certifications;track c){
@@ -115,14 +135,16 @@
             </li>
             }
         </ul>
-
+        }
         <!-- References -->
+        @if(data.references?.length){
         <h5>References</h5>
         @for(r of data.references;track r){
         <div>
             <strong>{{r.name}}</strong> — {{r.role}}
             <p>Contact: {{r.contact}}</p>
         </div>
+        }
         }
     </div>
 </div>

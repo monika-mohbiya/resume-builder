@@ -15,7 +15,21 @@ export class Template7Component {
       this.normalizeData();
     }
   }
+  getSkillNames(): string {
+    if (!this.data?.skills) return "";
 
+    // CASE 1: Array of strings → ["Angular", "React"]
+    if (typeof this.data.skills[0] === "string") {
+      return this.data.skills.join(", ");
+    }
+
+    // CASE 2: Array of objects → [{name: "Angular", level: "Expert"}]
+    if (typeof this.data.skills[0] === "object") {
+      return this.data.skills.map((s: any) => s.name).join(", ");
+    }
+
+    return "";
+  }
   // Normalize skills to an array of strings
   private normalizeData() {
     // Skills could be ['Angular','React'] or [{name:'Angular',level:'Expert'}]
@@ -31,18 +45,5 @@ export class Template7Component {
     }
   }
 
-  // Normalize experience item details — support multiple shapes
-  normalizeExperienceDetails(exp: any): string[] {
-    if (!exp) return [];
 
-    // If 'details' exists, use it
-    if (Array.isArray(exp.details)) {
-      return exp.details;
-    }
-
-    // If responsibilities/achievements exist, combine
-    const resp = Array.isArray(exp.responsibilities) ? exp.responsibilities : [];
-    const ach = Array.isArray(exp.achievements) ? exp.achievements : [];
-    return [...resp, ...ach];
-  }
 }

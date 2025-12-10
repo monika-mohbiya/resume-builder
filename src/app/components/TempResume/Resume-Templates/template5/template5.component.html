@@ -13,51 +13,56 @@
             <p>{{ data.title }}</p>
 
             <div class="section">
-                <h3>Contact</h3>
-                @if(data.email){
-                <span class="small word-wrap">{{data.email}}</span><br>
+                @if(data.email || data.phone || data.address){
+                <div class="contact">
+                    <h5 class="text-decoration-underline">Contact</h5>
+                    @if(data.email){
+                    <span class="small word-wrap">{{data.email}}</span><br>
+                    }
+                    @if(data.phone){
+                    <span class="small word-wrap">{{data.phone}}</span><br>
+                    }
+                    @if(data.address){
+                    <span class="small word-wrap">{{data.address}}</span><br>
+                    }
+                </div>
                 }
-                @if(data.phone){
-                <span>{{data.phone}}</span><br>
-                }
-                @if(data.address){
-                <span class="small word-wrap">{{data.address}}</span><br>
-                }
-
+                @if(data.linkedin || data.github || data.website){
                 <div class="urls">
                     <h5 class="text-decoration-underline">Urls</h5>
                     @if(data.linkedin){
-                    <p>LinkedIn: <a class="small word-wrap" [href]="data.linkedin">{{data.linkedin}}</a></p>
+                    <p>LinkedIn: <a class="small word-wrap">{{data.linkedin}}</a></p>
                     }
                     @if(data.github){
-                    <p>GitHub: <a class="small word-wrap" [href]="data.github">{{data.github}}</a></p>
+                    <p>GitHub: <a class="small word-wrap">{{data.github}}</a></p>
                     }
                     @if(data.website){
-                    <p>Website: <a class="small word-wrap" [href]="data.website">{{data.website}}</a></p>
+                    <p>Website: <a class="small word-wrap">{{data.website}}</a></p>
                     }
 
                 </div>
-
+                }
             </div>
-
+            @if(data?.skills?.length){
             <div class="section">
                 <h3>Skills</h3>
                 <ul>
                     @for(s of data.skills;track s){
-                    <li>{{s.name}}-{{s.level}}</li>
+                    <li>{{s.name}} </li>
                     }
                 </ul>
             </div>
-
+            }
+            @if(data.languages?.length){
             <div class="section">
                 <h3>Languages</h3>
                 <ul>
                     @for(lang of data.languages; track lang){
-                    <li>{{lang.name}} — {{lang.level}}</li>
+                    <li>{{lang.name}} </li>
                     }
                 </ul>
             </div>
-
+            }
         </div>
 
         <!-- RIGHT MAIN CONTENT -->
@@ -68,6 +73,7 @@
                 <p>{{data.summary}}</p>
             </div>
 
+            @if(data.experience?.length){
             <div class="section">
                 <h3>Experience</h3>
 
@@ -79,27 +85,29 @@
                     </div>
 
                     <div class="exp-table">
-
+                        @if(exp?.responsibilities?.length){
                         <h6>Responsibilities</h6>
                         <ul>
                             @for(r of exp.responsibilities; track r){
                             <li>{{r}}</li>
                             }
                         </ul>
+                        }
 
+                        @if(exp?.achievements?.length){
                         <h6>Achievements</h6>
                         <ul>
                             @for(a of exp.achievements; track a){
                             <li>{{a}}</li>
                             }
                         </ul>
-
+                        }
                     </div>
                 </div>
                 }
             </div>
-
-
+            }
+            @if(data?.education?.length){
             <div class="section">
                 <h3>Education</h3>
                 <table class="edu-table">
@@ -120,7 +128,8 @@
 
                 </table>
             </div>
-
+            }
+            @if(data.certifications?.length){
             <div class="section">
                 <h3>Certifications</h3>
                 <ul>
@@ -132,12 +141,14 @@
 
                 </ul>
             </div>
-
+            }
+            @if(data.interests?.length){
             <div class="section">
                 <h3>Interests</h3>
                 <p>{{ data.interests.join(', ') }}</p>
             </div>
-
+            }
+            @if(data.references?.length){
             <div class="section">
                 <h3>References</h3>
                 <ul>
@@ -151,7 +162,7 @@
 
                 </ul>
             </div>
-
+            }
         </div>
     </div>
 </div>

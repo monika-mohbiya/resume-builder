@@ -5,13 +5,20 @@
     <h4>{{data.title}}</h4>
 
     <!-- Contact Info -->
+    @if(data.email || data.phone || data.address){
     <div class="contact">
-        <p>{{data.email}}</p>
-        <p>{{data.phone}}</p>
+        <h5 class=" ">Contact</h5>
+        @if(data.email){
+        <span class="small word-wrap">{{data.email}}</span><br>
+        }
+        @if(data.phone){
+        <span class="small word-wrap">{{data.phone}}</span><br>
+        }
         @if(data.address){
-        <p>{{data.address}}</p>
+        <span class="small word-wrap">{{data.address}}</span><br>
         }
     </div>
+    }
 
     <!-- ================= Summary ================= -->
     <section>
@@ -20,16 +27,18 @@
     </section>
 
     <!-- ================= Skills ================= -->
+    @if(data?.skills?.length){
     <section>
         <h5>Skills</h5>
         <ul>
             @for(s of data.skills;track s){
-            <li>{{s.name}}-{{s.level}}</li>
+            <li>{{s.name}} </li>
             }
         </ul>
     </section>
-
+    }
     <!-- ================= Work Experience ================= -->
+    @if(data.experience?.length){
     <div class="section">
         <h3>Experience</h3>
 
@@ -41,45 +50,50 @@
             </div>
 
             <div class="exp-table">
-
+                @if(exp?.responsibilities?.length){
                 <h6>Responsibilities</h6>
                 <ul>
                     @for(r of exp.responsibilities; track r){
                     <li>{{r}}</li>
                     }
                 </ul>
-
+                }
+                @if(exp?.achievements?.length){
                 <h6>Achievements</h6>
                 <ul>
                     @for(a of exp.achievements; track a){
                     <li>{{a}}</li>
                     }
                 </ul>
-
+                }
             </div>
         </div>
         }
     </div>
-
+    }
 
     <!-- ================= Education ================= -->
+    @if(data?.education?.length){
     <section>
         <h5>Education</h5>
         @for(edu of data.education; track edu){
         <div class="edu-block">
             <p><strong>{{edu.degree}}</strong> — {{edu.university}} ({{edu.year}})</p>
+            @if(edu.gpa){
             <p>GPA: {{edu.gpa}}</p>
-
+            }
+            @if(edu?.projects?.length) {
             <strong>Projects:</strong>
             <ul>
                 @for(p of edu.projects; track p){
                 <li>{{p}}</li>
                 }
             </ul>
+            }
         </div>
         }
     </section>
-
+    }
     <!-- ================= Projects (Optional) ================= -->
     @if(data.projects?.length){
     <section>
@@ -93,6 +107,7 @@
     }
 
     <!-- ================= Certifications ================= -->
+    @if(data.certifications?.length){
     <section>
         <h5>Certifications</h5>
         <ul>
@@ -101,7 +116,7 @@
             }
         </ul>
     </section>
-
+    }
     <!-- ================= Portfolio Links ================= -->
     <section>
         <h5>Portfolio</h5>
@@ -117,16 +132,18 @@
     </section>
 
     <!-- ================= Languages ================= -->
+    @if(data.languages?.length){
     <section>
         <h5>Languages</h5>
         <ul>
             @for(lang of data.languages; track lang){
-            <li>{{lang.name}} — {{lang.level}}</li>
+            <li>{{lang.name}} </li>
             }
         </ul>
     </section>
-
+    }
     <!-- ================= Interests ================= -->
+    @if(data.interests?.length){
     <section>
         <h5>Interests</h5>
         <ul>
@@ -135,8 +152,9 @@
             }
         </ul>
     </section>
-
+    }
     <!-- ================= References ================= -->
+    @if(data.references?.length){
     <section>
         <h5>References</h5>
         @for(ref of data.references; track ref){
@@ -146,4 +164,5 @@
         </p>
         }
     </section>
+    }
 </div>

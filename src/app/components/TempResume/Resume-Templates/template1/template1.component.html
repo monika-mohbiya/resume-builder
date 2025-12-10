@@ -11,6 +11,7 @@
             <h2>{{data.name}}</h2>
             <h6>{{data.title}}</h6>
 
+            @if(data.email || data.phone || data.address){
             <div class="contact">
                 <h5>Contact</h5>
                 @if(data.email){
@@ -22,9 +23,9 @@
                 @if(data.address){
                 <span class="small word-wrap">{{data.address}}</span><br>
                 }
-
-
             </div>
+            }
+            @if(data.linkedin || data.github || data.website){
             <div class="urls">
                 <h5>Urls</h5>
                 @if(data.linkedin){
@@ -36,20 +37,15 @@
                 @if(data.website){
                 <p>Website: <a class="small word-wrap" [href]="data.website">{{data.website}}</a></p>
                 }
-
             </div>
+            }
 
-
-            @if(data.skills?.length){
+            @if(data?.skills?.length){
             <div class="skills">
                 <h5>Skills</h5>
                 <ul>
                     @for( s of data.skills;track s){
-                    <li>{{s.name}}
-                        @if(s.level){
-                        <span>({{s.level}})</span>
-                        }
-                    </li>
+                    <li>{{s.name}} </li>
                     }
 
                 </ul>
@@ -61,11 +57,7 @@
                 <h5>Languages</h5>
                 <ul>
                     @for(l of data.languages;track l){
-                    <li>{{l.name}}
-                        @if(l.level){
-                        <span>({{l.level}})</span>
-                        }
-                    </li>
+                    <li>{{l.name}} </li>
                     }
                 </ul>
             </section>

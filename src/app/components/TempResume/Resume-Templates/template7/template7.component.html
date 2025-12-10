@@ -8,11 +8,19 @@
             <h1>{{ data.name }}</h1>
             <h3>{{ data.title }}</h3>
 
+            @if(data.email || data.phone || data.address){
             <div class="tags">
-                <span>{{ data.email }}</span>
-                <span>{{ data.phone }}</span>
-                <span>{{ data.address }}</span>
+                @if(data.email){
+                <span class="small word-wrap">{{data.email}}</span>
+                }
+                @if(data.phone){
+                <span class="small word-wrap">{{data.phone}}</span>
+                }
+                @if(data.address){
+                <span class="small word-wrap">{{data.address}}</span>
+                }
             </div>
+            }
 
             <div class="links text-black">
                 @if(data.linkedin){
@@ -31,13 +39,15 @@
 
 
     <!-- SUMMARY -->
+    @if(data.summary){
     <section>
         <h2>Summary</h2>
         <p>{{ data.summary }}</p>
     </section>
-
+    }
 
     <!-- EXPERIENCE -->
+    @if(data?.experience?.length){
     <section>
         <h2>Experience</h2>
 
@@ -46,22 +56,38 @@
             <h3>{{ exp.role }}</h3>
             <span class="year">{{ exp.year }}</span>
             <p class="company">{{ exp.company }}</p>
-            <ul class="exp-details">
-                @for(d of normalizeExperienceDetails(exp);track d){
-                <li>{{ d }}</li>
-
+            @if(exp?.responsibilities?.length){
+            <h6>Responsibilities</h6>
+            <ul>
+                @for(r of exp.responsibilities; track r){
+                <li>{{r}}</li>
                 }
             </ul>
-
+            }
+            @if(exp?.achievements?.length){
+            <h6>Achievements</h6>
+            <ul>
+                @for(a of exp.achievements; track a){
+                <li>{{a}}</li>
+                }
+            </ul>
+            }
         </div>
         }
     </section>
-
-
+    }
+    @if(data?.skills?.length){
+    <section>
+        <h2>Skills</h2>
+        <div class="card">
+            {{ getSkillNames() }}
+        </div>
+    </section>
+    }
     <!-- EDUCATION -->
+    @if(data?.education?.length){
     <section>
         <h2>Education</h2>
-
         @for (edu of data.education; track $index) {
         <div class="card">
             <h3>{{ edu.degree }}</h3>
@@ -76,9 +102,10 @@
         </div>
         }
     </section>
-
+    }
 
     <!-- CERTIFICATIONS -->
+    @if(data.certifications?.length){
     <section>
         <h2>Certifications</h2>
         <div class="card">
@@ -90,34 +117,36 @@
         </div>
 
     </section>
+    }
 
 
     <!-- LANGUAGES -->
+    @if(data.languages?.length){
     <section>
         <h2>Languages</h2>
         <div class="card">
             <ul>
                 @for (lang of data.languages; track lang) {
-                <li>{{ lang.name }} — {{ lang.level }}</li>
+                <li>{{ lang.name }} </li>
                 }
             </ul>
         </div>
 
     </section>
-
+    }
 
     <!-- INTERESTS -->
+    @if(data.interests?.length){
     <section>
         <h2>Interests</h2>
         <div class="card">
             <p>{{ data.interests.join(', ') }}</p>
         </div>
-
-
     </section>
-
+    }
 
     <!-- REFERENCES -->
+    @if(data.references?.length){
     <section>
         <h2>References</h2>
         <div class="card">
@@ -132,5 +161,6 @@
 
 
     </section>
+    }
 
 </div>

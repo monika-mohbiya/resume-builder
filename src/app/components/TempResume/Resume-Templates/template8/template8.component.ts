@@ -31,18 +31,5 @@ export class Template8Component {
     }
   }
 
-  // Normalize experience item details — support multiple shapes
-  normalizeExperienceDetails(exp: any): string[] {
-    if (!exp) return [];
 
-    // If 'details' exists, use it
-    if (Array.isArray(exp.details)) {
-      return exp.details;
-    }
-
-    // If responsibilities/achievements exist, combine
-    const resp = Array.isArray(exp.responsibilities) ? exp.responsibilities : [];
-    const ach = Array.isArray(exp.achievements) ? exp.achievements : [];
-    return [...resp, ...ach];
-  }
 }

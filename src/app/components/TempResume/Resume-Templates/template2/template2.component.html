@@ -9,10 +9,18 @@
             <h1>{{data.name}}</h1>
             <h3>{{data.title}}</h3>
 
-            <span>{{data.address}}</span><br>
-            <span>Email: {{data.email}}</span><br>
-            <span>Phone: {{data.phone}}</span><br>
 
+            @if(data.address){
+            <span>Address: {{data.address}}</span><br>
+            }
+            @if(data.email){
+            <span>Email: {{data.email}}</span><br>
+            }
+            @if(data.phone){
+            <span>Phone: {{data.phone}}</span><br>
+            }
+
+            @if(data.linkedin || data.github || data.website){
             <div class="links">
                 @if(data.linkedin){
                 <a class="small word-wrap" [href]="data.linkedin">{{data.linkedin}}</a> |
@@ -26,49 +34,63 @@
                 }
 
             </div>
+            }
+
         </div>
     </div>
 
     <hr />
 
     <!-- Summary -->
+    @if(data.summary){
     <section>
         <h2>Summary</h2>
         <p>{{data.summary}}</p>
     </section>
+    }
+
 
     <!-- Experience -->
+    @if(data.experience?.length){
     <section>
         <h2>Experience</h2>
 
         @for(exp of data.experience;track exp){
         <div class="section-block">
             <strong>{{exp.role}}</strong> - {{exp.company}} ({{exp.year}})
+            @if(exp.details?.length){
+            <h6>Responsibilities</h6>
             <ul>
                 @for(d of exp.details;track d){
                 <li>{{d}}</li>
                 }
             </ul>
+            }
         </div>
         }
     </section>
-
+    }
     <!-- Skills -->
+    @if(data?.skills?.length){
     <section>
         <h2>Skills</h2>
         <p class="skill-list">
             {{ getSkillNames() }}
         </p>
     </section>
+    }
 
     <!-- Education -->
+    @if(data?.education?.length){
     <section>
         <h2>Education</h2>
         @for(edu of data.education; track edu){
         <div class="section-block">
             <strong>{{edu.degree}}</strong> – {{edu.university}} ({{edu.year}})
+            @if(edu.gpa){
             <p>GPA: {{edu.gpa}}</p>
-
+            }
+            @if(edu?.projects?.length) {
             <strong>Projects:</strong>
             <ul>
                 @for(p of edu.projects; track p){
@@ -76,11 +98,13 @@
                 }
 
             </ul>
+            }
         </div>
         }
     </section>
-
+    }
     <!-- Certifications -->
+    @if(data.certifications?.length){
     <section>
         <h2>Certifications</h2>
         <ul>
@@ -91,8 +115,9 @@
             }
         </ul>
     </section>
-
+    }
     <!-- Languages -->
+    @if(data.languages?.length){
     <section>
         <h2>Languages</h2>
 
@@ -101,15 +126,17 @@
         </p>
 
     </section>
-
+    }
     <!-- Interests -->
+    @if(data.interests?.length){
     <section>
         <h2>Interests</h2>
         <p> {{ getInterestNames() }}</p>
 
     </section>
-
+    }
     <!-- References -->
+    @if(data.references?.length){
     <section>
         <h2>References</h2>
         @for(r of data.references;track r){
@@ -119,4 +146,5 @@
         </div>
         }
     </section>
+    }
 </div>
