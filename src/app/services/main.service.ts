@@ -20,7 +20,8 @@ export class MainService {
   hide() {
     this.loading.set(false);
   }
-  async login(data: any): Promise<any> {
+  async login(): Promise<any> {
+    const data = { username: 'emilys', password: 'emilyspass' }
     return await firstValueFrom(
       this.http.post('https://dummyjson.com/auth/login', data)
     );

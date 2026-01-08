@@ -51,8 +51,9 @@ export class LoginComponent {
     }
   }
   async loginUser(val: any) {
+    // console.log(val)
     try {
-      const response = await this.service.login(val);
+      const response = await this.service.login();
       console.log('Login successful:', response.token);
       // localStorage.setItem('Access Token:', response.token);
       localStorage.setItem('accessToken', response.accessToken);

@@ -21,7 +21,7 @@
             @for(t of templates;track t){
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">
                 <div class="preview-box" (click)="openImage(t)">
-                    <img [src]="t.preview" class="resume-template" (load)="this.service.hide()" />
+                    <img [src]="t.preview" class="resume-template" />
                 </div>
             </div>
             }

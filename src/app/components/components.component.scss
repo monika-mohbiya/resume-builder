@@ -1,6 +1,18 @@
 .main-toolbarheader {
-    display: flex;
-    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.main-container {
+    height: 100vh;
+    padding-top: 64px; // toolbar height (desktop)
+}
+
+.content {
+    padding: 16px;
 }
 
 .app-title {
